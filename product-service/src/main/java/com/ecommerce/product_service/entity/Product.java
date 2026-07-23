@@ -34,11 +34,27 @@ public class Product {
     @Column
     private String description;
 
+    @Column
+    private double price;
+
+    @Column
+    private int stock;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column
+    private boolean active;
+
+    @Version
+    @Column
+    private int version;
+
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
     @Column(name = "updated_at")
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 }

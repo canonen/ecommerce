@@ -9,12 +9,28 @@ services:
       dockerfile: Dockerfile
     container_name: ecommerce-user-service
     env_file:
-      - .env.docker
+      - ./user-service/.env.docker
     ports:
       - "8081:8081"
     depends_on:
       - postgres
       - redis
+    networks:
+      - ecommerce-network
+
+    # ─── Product Service (YENİ EKLENDİ) ───────────────────────
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    container_name: ecommerce-product-service
+    # Sadece kendi klasöründeki env'yi okuyor
+    env_file:
+      - ./product-service/.env.docker
+    ports:
+      - "8082:8082"
+    depends_on:
+      - postgres
     networks:
       - ecommerce-network
 
@@ -25,7 +41,8 @@ services:
     environment:
       POSTGRES_USER: ecommerce
       POSTGRES_PASSWORD: ecommerce123
-      POSTGRES_DB: userdb
+      # Buraya genel bir isim veriyoruz ki asıl DB'lerimizle çakışmasın
+      POSTGRES_DB: ecommerce_main_db
     ports:
       - "5432:5432"
     volumes:
