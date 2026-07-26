@@ -1,11 +1,10 @@
 package com.ecommerce.product_service.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 public class CreateCategoryRequest {
 
     @NotBlank(message = "name alanı boş olamaz.")
