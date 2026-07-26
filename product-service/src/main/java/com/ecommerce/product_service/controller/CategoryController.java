@@ -6,6 +6,7 @@ import com.ecommerce.product_service.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class CategoryController {
     public ResponseEntity<CategoryResponse> createCategory(
             @Valid @RequestBody CreateCategoryRequest categoryRequest
     ){
-        return ResponseEntity.ok(categoryService.createCategory(categoryRequest));
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.createCategory(categoryRequest));
     }
 
     @GetMapping("/{id}")

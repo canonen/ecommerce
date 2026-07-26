@@ -2,6 +2,7 @@ package com.ecommerce.product_service.dto.request;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 import lombok.Getter;
@@ -13,14 +14,15 @@ import java.math.BigDecimal;
 @Setter
 public class CreateProductRequest {
 
-    @NotBlank
-    private long categoryId;
+    @NotNull
+    private Long categoryId;
 
     @NotBlank
     private String name;
 
     private String description;
 
+    @NotNull
     @PositiveOrZero
     private BigDecimal price;
 

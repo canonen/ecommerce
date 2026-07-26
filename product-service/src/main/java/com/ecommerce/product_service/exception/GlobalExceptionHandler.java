@@ -72,4 +72,17 @@ public class GlobalExceptionHandler {
                         .build()
         );
     }
+
+    @ExceptionHandler(CategoryAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handleCategoryAlreadyExists(
+            CategoryAlreadyExistsException ex) {
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                ErrorResponse.builder()
+                        .status(HttpStatus.NOT_FOUND.value())
+                        .message(ex.getMessage())
+                        .timestamp(LocalDateTime.now())
+                        .build()
+        );
+    }
 }

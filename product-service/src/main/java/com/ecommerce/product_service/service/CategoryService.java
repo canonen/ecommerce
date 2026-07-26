@@ -3,6 +3,7 @@ package com.ecommerce.product_service.service;
 import com.ecommerce.product_service.dto.request.CreateCategoryRequest;
 import com.ecommerce.product_service.dto.response.CategoryResponse;
 import com.ecommerce.product_service.entity.Category;
+import com.ecommerce.product_service.exception.CategoryAlreadyExistsException;
 import com.ecommerce.product_service.exception.CategoryNotFoundException;
 import com.ecommerce.product_service.mapper.CategoryMapper;
 import com.ecommerce.product_service.repository.CategoryRepository;
@@ -24,6 +25,10 @@ public class CategoryService {
     }
 
     public CategoryResponse createCategory(CreateCategoryRequest categoryRequest) {
+        if (categoryRepository.existsByName(categoryRequest.getName())) {
+            throw new CategoryAlreadyExistsException(categoryRequest.getName());
+        }
+
         Category category = categoryMapper.toEntity(categoryRequest);
         categoryRepository.save(category);
 
