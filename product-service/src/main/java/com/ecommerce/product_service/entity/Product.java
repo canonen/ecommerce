@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,10 +34,10 @@ public class Product {
     private String description;
 
     @Column
-    private double price;
+    private BigDecimal price;
 
     @Column
-    private int stock;
+    private Integer stock;
 
     @Column(name = "image_url")
     private String imageUrl;

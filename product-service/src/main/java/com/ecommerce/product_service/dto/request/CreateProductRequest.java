@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 public class CreateProductRequest {
@@ -20,10 +22,10 @@ public class CreateProductRequest {
     private String description;
 
     @PositiveOrZero
-    private double price;
+    private BigDecimal price;
 
     @PositiveOrZero
-    private int stock;
+    private Integer stock;
 
     @NotBlank
     private String imageUrl;
