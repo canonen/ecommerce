@@ -1,6 +1,8 @@
 package com.ecommerce.product_service.controller;
 
 import com.ecommerce.product_service.dto.request.CreateProductRequest;
+import com.ecommerce.product_service.dto.request.UpdateProductRequest;
+import com.ecommerce.product_service.dto.request.UpdateStockRequest;
 import com.ecommerce.product_service.dto.response.ProductResponse;
 import com.ecommerce.product_service.service.ProductService;
 import jakarta.validation.Valid;
@@ -45,8 +47,10 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> updateProductById(@PathVariable Long id){
-        return ResponseEntity.ok(productService.getProductById(id));
+    public ResponseEntity<ProductResponse> updateProductById(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateProductRequest request) {
+        return ResponseEntity.ok(productService.updateProduct(id, request));
     }
 
     @DeleteMapping("/{id}")
@@ -60,8 +64,10 @@ public class ProductController {
     }
 
     @PutMapping("/{id}/stock")
-    public ResponseEntity<String> updateStock(@PathVariable Long id){
-        return ResponseEntity.ok("Bu kısmı yapamadım :D");
+    public ResponseEntity<ProductResponse> updateStock(
+            @PathVariable Long id,
+            @Valid @RequestBody UpdateStockRequest request) {
+        return ResponseEntity.ok(productService.updateStock(id, request));
     }
 
 }
